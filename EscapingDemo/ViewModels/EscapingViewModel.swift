@@ -13,19 +13,26 @@ class EscapingViewModel: ObservableObject {
   
   func getData() {
     
+    //    Uncomment example to test
+    
     //    Example 1
     //    let newData = downloadData()
     //    text = newData
     
     //    Example 2
-//    downloadData2 { returnedData in
-//      text = returnedData
-//    }
+    //    downloadData2 { returnedData in
+    //      text = returnedData
+    //    }
     
-//    Example 3
-    downloadData3 { returnedData in
-      self.text = returnedData
-    }
+    //    Example 3
+    //    downloadData3 { [weak self] returnedData in
+    //      self?.text = returnedData
+    //    }
+    
+    //    Example 4
+    //    downloadData4 { [weak self] returnedResult in
+    //      self?.text = returnedResult.data
+    //    }
     
     //    downloadData5 { [weak self] returnedResult in
     //      self?.text = returnedResult.data
@@ -42,7 +49,7 @@ class EscapingViewModel: ObservableObject {
   }
   
   func downloadData3(completionHandler: @escaping (_ data: String) -> ()) {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
       completionHandler("New data!")
     }
   }
@@ -63,8 +70,10 @@ class EscapingViewModel: ObservableObject {
   
 }
 
+//For use in #5
 typealias DownloadCompletion = (DownloadResult) -> ()
 
+//For use in #4
 struct DownloadResult {
   let data: String
 }
