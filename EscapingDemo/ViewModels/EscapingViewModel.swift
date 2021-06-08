@@ -10,11 +10,27 @@ import Foundation
 class EscapingViewModel: ObservableObject {
   
   @Published var text: String = "Hello"
- 
+  
   func getData() {
-    downloadData5 { [weak self] returnedResult in
-      self?.text = returnedResult.data
+    
+    //    Example 1
+    //    let newData = downloadData()
+    //    text = newData
+    
+    //    Example 2
+//    downloadData2 { returnedData in
+//      text = returnedData
+//    }
+    
+//    Example 3
+    downloadData3 { returnedData in
+      self.text = returnedData
     }
+    
+    //    downloadData5 { [weak self] returnedResult in
+    //      self?.text = returnedResult.data
+    //    }
+    
   }
   
   func downloadData() -> String {
@@ -22,11 +38,11 @@ class EscapingViewModel: ObservableObject {
   }
   
   func downloadData2(completionHandler: (_ data: String) -> Void) {
-      completionHandler("New data!")
+    completionHandler("New data!")
   }
   
   func downloadData3(completionHandler: @escaping (_ data: String) -> ()) {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
       completionHandler("New data!")
     }
   }
